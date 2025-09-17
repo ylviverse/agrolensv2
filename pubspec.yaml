@@ -1,0 +1,59 @@
+name: agrolens_version2
+description: "A new Flutter project."
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.17.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter   
+  camera: ^0.11.1
+  flutter_screenutil: ^5.8.4
+  cupertino_icons: ^1.0.0
+  lottie: ^3.1.0
+  smooth_page_indicator: ^1.1.0
+  flutter_native_splash: ^2.4.6
+  image_picker: ^1.0.7
+  
+  pytorch_lite: ^4.3.2
+  image: ^4.0.17 
+
+flutter_native_splash:
+  background_image: "assets/images/Background.png"
+  image: assets/images/agrolens_logo_transparent.png
+  android: true
+  ios: true
+  web: false
+  fullscreen: true
+
+  ios_deployment_target: "13.0"
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.13.1
+  
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/agrolens_logo.jpg
+    - assets/images/agrolens_logo.png
+    - assets/images/agrolens_logo_transparent.png
+    - assets/animations/Farmer_crop.json
+    - assets/animations/Camera.json
+    - assets/images/Background.png
+    - assets/animations/Loading.json
+    - assets/model/MobileNetV2_for_mobile_finalV2.ptl
+  
+
+   
+    
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/agrolens_logo.jpg"

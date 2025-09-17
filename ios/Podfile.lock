@@ -1,0 +1,58 @@
+PODS:
+  - camera_avfoundation (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+  - flutter_native_splash (2.4.3):
+    - Flutter
+  - image_picker_ios (0.0.1):
+    - Flutter
+  - LibTorch (1.13.0.1):
+    - LibTorch/Core (= 1.13.0.1)
+  - LibTorch/Core (1.13.0.1):
+    - LibTorch/Torch
+  - LibTorch/Torch (1.13.0.1)
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - pytorch_lite (0.0.1):
+    - Flutter
+    - LibTorch (~> 1.13.0.1)
+
+DEPENDENCIES:
+  - camera_avfoundation (from `.symlinks/plugins/camera_avfoundation/ios`)
+  - Flutter (from `Flutter`)
+  - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
+  - pytorch_lite (from `.symlinks/plugins/pytorch_lite/ios`)
+
+SPEC REPOS:
+  trunk:
+    - LibTorch
+
+EXTERNAL SOURCES:
+  camera_avfoundation:
+    :path: ".symlinks/plugins/camera_avfoundation/ios"
+  Flutter:
+    :path: Flutter
+  flutter_native_splash:
+    :path: ".symlinks/plugins/flutter_native_splash/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
+  path_provider_foundation:
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
+  pytorch_lite:
+    :path: ".symlinks/plugins/pytorch_lite/ios"
+
+SPEC CHECKSUMS:
+  camera_avfoundation: be3be85408cd4126f250386828e9b1dfa40ab436
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  flutter_native_splash: c32d145d68aeda5502d5f543ee38c192065986cf
+  image_picker_ios: 7fe1ff8e34c1790d6fff70a32484959f563a928a
+  LibTorch: 8abfa5fc9d146230b31065a29b0502e1104956ea
+  path_provider_foundation: 080d55be775b7414fd5a5ef3ac137b97b097e564
+  pytorch_lite: 5563729b5e263ff90760d34d127c4c0be7115846
+
+PODFILE CHECKSUM: 251cb053df7158f337c0712f2ab29f4e0fa474ce
+
+COCOAPODS: 1.16.2
