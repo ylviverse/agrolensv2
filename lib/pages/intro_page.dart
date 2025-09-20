@@ -1,4 +1,5 @@
 
+import 'package:agrolens_version2/camera/camera.dart';
 import 'package:agrolens_version2/colors/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -225,7 +226,7 @@ class IntroPageState extends State<IntroPage> with TickerProviderStateMixin {
                           context,
                           PageRouteBuilder(
                             pageBuilder: (context, animation, secondaryAnimation) =>
-                                const Placeholder(), // PLACEHOLDERRRR
+                                const CameraScreen(), 
                             transitionsBuilder: (context, animation,
                                 secondaryAnimation, child) {
                               return SlideTransition(

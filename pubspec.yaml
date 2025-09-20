@@ -48,7 +48,8 @@ flutter:
     - assets/animations/Camera.json
     - assets/images/Background.png
     - assets/animations/Loading.json
-    - assets/model/MobileNetV2_for_mobile_finalV2.ptl
+
+    - assets/model/MobileNetV2_mobile_finalV1.ptl
   
 
    
