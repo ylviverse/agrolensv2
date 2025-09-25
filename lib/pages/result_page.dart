@@ -139,10 +139,10 @@ class _ResultPageState extends State<ResultPage> with TickerProviderStateMixin {
   Color _getHealthColor(String disease) {
     switch (disease.toLowerCase()) {
       case 'brown spot':
-      case 'rice blast':
+      case 'leaf blast':
       case 'bacterial leaf blight':
       case 'sheath blight':
-      case 'tungro virus':
+      case 'tungro':
         return CupertinoColors.systemYellow;
       case 'unknown disease':
         return CupertinoColors.systemOrange;
@@ -156,13 +156,13 @@ class _ResultPageState extends State<ResultPage> with TickerProviderStateMixin {
   IconData _getHealthIcon(String disease) {
     switch (disease.toLowerCase()) {
       case 'brown spot':
-      case 'rice blast':
+      case 'leaf blast':
       case 'bacterial leaf blight':
       case 'sheath blight':
-      case 'tungro virus':
-        return CupertinoIcons.exclamationmark_triangle_fill;
+      case 'tungro':
+        return CupertinoIcons.exclamationmark_triangle;
       case 'unknown disease':
-        return CupertinoIcons.question_circle_fill;
+        return CupertinoIcons.question_circle;
       case 'error':
         return CupertinoIcons.xmark_circle_fill;
       default:
@@ -276,6 +276,7 @@ class _ResultPageState extends State<ResultPage> with TickerProviderStateMixin {
 
               const SizedBox(height: 60),
 
+
               // Loading Animation or Results
               if (_isAnalyzing) ...[
                 _buildLoadingAnimation(),
@@ -284,12 +285,13 @@ class _ResultPageState extends State<ResultPage> with TickerProviderStateMixin {
                 if (_analysisResults != null &&
                     _prediction != null &&
                     _prediction != 'Error') ...[
-                  // Get top 3 predictions
+                  // This block will now build the list of results
                   () {
+                    // Get top 3 predictions from the model's output
                     List<Map<String, dynamic>> top3 =
                         _analysisResults!['top3_predictions'] ?? [];
 
-                    // If no top3 data, create fallback with current prediction
+                    // Fallback if top3 is still empty for some reason
                     if (top3.isEmpty &&
                         _prediction != null &&
                         _confidence != null) {
@@ -297,102 +299,88 @@ class _ResultPageState extends State<ResultPage> with TickerProviderStateMixin {
                         {
                           'disease': _prediction!,
                           'confidence': _confidence!,
-                          'index': 0,
                         }
                       ];
                     }
 
+                    // ...existing code...
+                    // Build the UI widgets from the top3 list
                     return Column(
-                      children: [
-                        // Display each prediction in its own container
-                        ...List.generate(
-                          top3.length > 3 ? 3 : top3.length,
-                          (i) => Container(
-                            width: double.infinity,
-                            margin: EdgeInsets.only(
-                                bottom:
-                                    i < (top3.length > 3 ? 3 : top3.length) - 1
-                                        ? 16
-                                        : 0),
-                            padding: const EdgeInsets.all(24),
-                            decoration: BoxDecoration(
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.circular(15),
-                              border: Border.all(
-                                color: i == 0
-                                    ? CupertinoColors.white.withOpacity(0.8)
-                                    : CupertinoColors.white.withOpacity(0.3),
-                                width: i == 0 ? 2.0 : 1.5,
-                              ),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // Row(
-                                //   children: [
-                                //     Icon(
-                                //       i == 0
-                                //           ? CupertinoIcons.star_fill
-                                //           : CupertinoIcons.info_circle,
-                                //       color: CupertinoColors.white,
-                                //       size: 22,
-                                //     ),
-                                //     const SizedBox(width: 12),
-                                //     Text(
-                                //       i == 0
-                                //           ? 'Primary Detection'
-                                //           : 'Alternative #${i + 1}',
-                                //       style: const TextStyle(
-                                //         fontSize: 18,
-                                //         fontWeight: FontWeight.w600,
-                                //         color: CupertinoColors.white,
-                                //       ),
-                                //     ),
-                                    
-                                //   ],
-                                // ),
-                               
-                                Text(
-                                  top3[i]['disease'],
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: _getHealthColor(top3[i]['disease']),
-                                  ),
-                                ),
-                                /*if (i == 0 &&
-                                    _analysisResults!['severity'] != null) ...[
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    'Severity: ${_analysisResults!['severity']}',
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      color: CupertinoColors.white,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],*/
-                                
-                                const SizedBox(height: 12),
-                                Text(
-                                  _model.getDiseaseDescription(
-                                      top3[i]['disease']),
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    color: CupertinoColors.white,
-                                    height: 1.4,
-                                  ),
-                                ),
-                              ],
+                      children: List.generate(top3.length, (i) {
+                        final prediction = top3[i];
+                        final diseaseName = prediction['disease'] as String;
+                        final confidence = (prediction['confidence'] as double) * 100;
+
+                        // This is the widget for a single result item, using your original design style
+                        return Container(
+                          margin: const EdgeInsets.symmetric(vertical: 8),
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: i == 0
+                                ? Colors.white.withOpacity(0.25) 
+                                : Colors.white.withOpacity(0.15),
+                            borderRadius: BorderRadius.circular(12),
+                            border: Border.all(
+                              color: i == 0
+                                  ? Colors.white.withOpacity(0.5)
+                                  : Colors.white.withOpacity(0.2),
+                              width: 1.5,
                             ),
                           ),
-                        ),
-                      ],
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  // Use your icon helper
+                                  Icon(
+                                    _getHealthIcon(diseaseName),
+                                    color: _getHealthColor(diseaseName),
+                                    size: 28,
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Text(
+                                      diseaseName,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+
+
+                              
+                              // Divider using your health color
+                              Divider(
+                                color: _getHealthColor(diseaseName).withOpacity(0.5),
+                                thickness: 1,
+                              ),
+                              const SizedBox(height: 12),
+                              // Description text
+                              Text(
+                                _model.getDiseaseDescription(diseaseName),
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  height: 1.4,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }),
                     );
                   }(),
                 ],
 
                 const SizedBox(height: 20),
+
               ],
             ],
           ),
