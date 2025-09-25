@@ -99,7 +99,7 @@ class _LoadingPageState extends State<LoadingPage> {
                         lottieAsset: 'assets/animations/Camera.json',
                         title: 'Snap & Analyze',
                         description:
-                            'Easily analyze rice leaf diseases with the help of AI.\n\nRice diseases detectable are the following:\n\nRICE BLAST\nBROWN SPOT\nLEAF BLIGHT\nSHEAT BLIGHT\nBACTERIAL LEAF STREAK.',
+                            'Easily analyze rice leaf diseases with the help of AI.\n\nRice diseases detectable are the following:\n\nBACTERIAL LEAF BLIGHT\nBROWN SPOT\nLEAF BLAST\nSHEAT BLIGHT\nTUNGRO.',
                         size: size,
                       ),
                     ),
