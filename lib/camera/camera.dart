@@ -69,16 +69,9 @@ class _CameraScreenState extends State<CameraScreen>
 
   Future<void> _takePicture() async {
     await _initializeControllerFuture;
-    final image = await _controller.takePicture().catchError((error) {
-      _showErrorSnackBar("Failed to take picture");
-      return null;
-    });
+    
 
-    if (image != null) {
-      setState(() => _capturedImage = image);
-      HapticFeedback.mediumImpact();
-      _captureAnimationController.forward(from: 0);
-    }
+    
   }
 
   Future<void> _pickImageFromGallery() async {
